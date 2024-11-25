@@ -52,4 +52,16 @@ class EmployeeControllerTest {
         assertThat(result).usingRecursiveComparison().isEqualTo(employees);
     }
 
+    @Test
+    public void should_return_an_Employee_when_get_by_id_given_an_existing_id() throws Exception {
+        //Given
+        Employee expectEmployee = employeeRepository.getAll().get(0);
+        //When
+        String response = client.perform(MockMvcRequestBuilders.get("/employee/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
+        //Then
+        Employee result = jacksonTester.parseObject(response);
+        assertEquals(expectEmployee.getId(),result.getId());
+    }
+
 }
