@@ -22,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @AutoConfigureMockMvc
@@ -135,11 +136,26 @@ class EmployeeControllerTest {
         client.perform(MockMvcRequestBuilders.delete("/employee/" + employee.getId()))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        // Update the employee list after deletion
         employees = employeeRepository.getAll();
 
         // Then
         assertFalse(employees.contains(employee));
     }
+
+    @Test
+    void should_return_2_employees_when_get_by_page_given_page_1_and_page_size_5() throws Exception {
+        // Given
+        List<Employee> employees = employeeRepository.getAll();
+        // When
+        String response = client.perform(MockMvcRequestBuilders.get("/employee").param("page", "1").param("pageSize", "5"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andReturn().getResponse().getContentAsString();
+        // Then
+        List<Employee> resultList = jacksonList.parseObject(response);
+        assertEquals(employees.get(0).getId(), resultList.get(0).getId());
+        assertEquals(employees.get(1).getId(), resultList.get(1).getId());
+    }
+
+
 
 }
