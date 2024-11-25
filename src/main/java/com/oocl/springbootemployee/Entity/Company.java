@@ -8,11 +8,10 @@ public class Company {
     private Integer employeesNumber;
     private List<Employee> employees;
 
-    public Company(Integer id, String companyName, Integer employeesNumber, List<Employee> employees) {
+    public Company(Integer id, String companyName) {
         this.id = id;
         this.companyName = companyName;
-        this.employeesNumber = employeesNumber;
-        this.employees = employees;
+
     }
 
     public Integer getId() {
