@@ -49,6 +49,9 @@ public class EmployeeController {
          employeeRepository.remove(id);
     }
 
-    public getByPage
+    @GetMapping(params = {"page","pageSize"})
+    public List<Employee> getByPage(@RequestParam Integer page,  Integer pageSize){
+        return employeeRepository.getByPage(page,pageSize);
+    }
 
 }
