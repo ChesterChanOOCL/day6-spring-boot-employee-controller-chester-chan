@@ -59,4 +59,12 @@ public class EmployeeRepository {
         employees.removeIf(employee -> employee.getId().equals(id));
     }
 
+
+    public List<Employee> getByPage(Integer page, Integer pageSize) {
+        return employees.stream()
+                .skip((page - 1) * pageSize)
+                .limit(pageSize)
+                .collect(Collectors.toList());
+    }
+
 }
