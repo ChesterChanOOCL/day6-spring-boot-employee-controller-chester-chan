@@ -41,4 +41,22 @@ public class EmployeeRepository {
         employees.add(employee);
         return employee;
     }
+
+    public Employee update(Employee employee){
+        employees.stream()
+                .filter(employee1 -> employee1.getId().equals(employee.getId()))
+                .findFirst()
+                .ifPresent(employee1 -> {
+                    employee1.setName(employee.getName());
+                    employee1.setAge(employee.getAge());
+                    employee1.setGender(employee.getGender());
+                    employee1.setSalary(employee.getSalary());
+                });
+        return employee;
+    }
+
+    public void remove(Integer id){
+        employees.removeIf(employee -> employee.getId().equals(id));
+    }
+
 }

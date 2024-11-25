@@ -38,4 +38,15 @@ public class EmployeeController {
         return employeeRepository.save(employee);
     }
 
+
+    @PutMapping
+    public Employee update(@RequestBody Employee employee){
+        return employeeRepository.update(employee);
+    }
+
+    @DeleteMapping("/{id}")
+    public void remove(@PathVariable Integer id){
+         employeeRepository.remove(id);
+    }
+
 }
