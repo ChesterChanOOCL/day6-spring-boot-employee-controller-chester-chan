@@ -99,4 +99,29 @@ class EmployeeControllerTest {
         //Then
     }
 
+    @Test
+    void should_return_employee_with_testPut_as_name_and_salary_13000_when_update_employee_with_id_1_given_employee() throws Exception {
+        // Given
+        List<Employee> employees = employeeRepository.getAll();
+        Employee oldEmployee = employees.get(0);
+
+        String employeeJsonString = "{\n" +
+                "    \"id\": 1,\n" +
+                "    \"name\": \"testPut\",\n" +
+                "    \"age\": 21,\n" +
+                "    \"gender\": \"Male\",\n" +
+                "    \"salary\": 13000\n" +
+                "}";
+        //When
+        client.perform(MockMvcRequestBuilders.put("/employee").contentType(MediaType.APPLICATION_JSON).content(employeeJsonString))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("testPut"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.age").value(21))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("Male"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(new BigDecimal(13000)));
+    }
+
+
+
 }
