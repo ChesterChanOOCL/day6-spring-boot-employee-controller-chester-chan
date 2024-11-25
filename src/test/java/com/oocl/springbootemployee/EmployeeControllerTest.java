@@ -123,5 +123,23 @@ class EmployeeControllerTest {
     }
 
 
+    // Delete
+
+    @Test
+    void should_return_null_and_list_cannot_see_that_employee_when_delete_an_employee() throws Exception {
+        // Given
+        List<Employee> employees = employeeRepository.getAll();
+        Employee employee = employees.get(0);
+
+        // When
+        client.perform(MockMvcRequestBuilders.delete("/employee/" + employee.getId()))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        // Update the employee list after deletion
+        employees = employeeRepository.getAll();
+
+        // Then
+        assertFalse(employees.contains(employee));
+    }
 
 }
