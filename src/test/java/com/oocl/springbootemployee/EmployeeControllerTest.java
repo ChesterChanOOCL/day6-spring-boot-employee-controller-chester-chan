@@ -52,7 +52,7 @@ class EmployeeControllerTest {
         //Given
         List<Employee> employees = employeeRepository.getAll();
         //When
-        String response = client.perform(MockMvcRequestBuilders.get("/employee/all"))
+        String response = client.perform(MockMvcRequestBuilders.get("/employees/all"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(3)))
                 .andReturn().getResponse().getContentAsString();
@@ -66,7 +66,7 @@ class EmployeeControllerTest {
         //Given
         Employee expectEmployee = employeeRepository.getAll().get(0);
         //When
-        String response = client.perform(MockMvcRequestBuilders.get("/employee/1"))
+        String response = client.perform(MockMvcRequestBuilders.get("/employees/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk()).andReturn().getResponse().getContentAsString();
         //Then
         Employee result = jacksonTester.parseObject(response);
@@ -78,7 +78,7 @@ class EmployeeControllerTest {
         //Given
         List<Employee> employees = employeeRepository.getAll();
         //When
-        String response = client.perform(MockMvcRequestBuilders.get("/employee").param("gender","Male"))
+        String response = client.perform(MockMvcRequestBuilders.get("/employees").param("gender","Male"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$",hasSize(2)))
                 .andReturn().getResponse().getContentAsString();
@@ -98,7 +98,7 @@ class EmployeeControllerTest {
                 "    \"salary\": 3000\n" +
                 "}";
         //When
-        client.perform(MockMvcRequestBuilders.post("/employee").contentType(MediaType.APPLICATION_JSON).content(employee))
+        client.perform(MockMvcRequestBuilders.post("/employees").contentType(MediaType.APPLICATION_JSON).content(employee))
                 .andExpect(MockMvcResultMatchers.status().isCreated())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("test"))
@@ -123,7 +123,7 @@ class EmployeeControllerTest {
                 "    \"salary\": 13000\n" +
                 "}";
         //When
-        client.perform(MockMvcRequestBuilders.put("/employee").contentType(MediaType.APPLICATION_JSON).content(employeeJsonString))
+        client.perform(MockMvcRequestBuilders.put("/employees").contentType(MediaType.APPLICATION_JSON).content(employeeJsonString))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id").isNotEmpty())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("testPut"))
@@ -142,8 +142,8 @@ class EmployeeControllerTest {
         Employee employee = employees.get(0);
 
         // When
-        client.perform(MockMvcRequestBuilders.delete("/employee/" + employee.getId()))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+        client.perform(MockMvcRequestBuilders.delete("/employees/" + employee.getId()))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
 
         employees = employeeRepository.getAll();
 
@@ -156,7 +156,7 @@ class EmployeeControllerTest {
         // Given
         List<Employee> employees = employeeRepository.getAll();
         // When
-        String response = client.perform(MockMvcRequestBuilders.get("/employee").param("page", "1").param("pageSize", "5"))
+        String response = client.perform(MockMvcRequestBuilders.get("/employees").param("page", "1").param("pageSize", "5"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andReturn().getResponse().getContentAsString();
         // Then
