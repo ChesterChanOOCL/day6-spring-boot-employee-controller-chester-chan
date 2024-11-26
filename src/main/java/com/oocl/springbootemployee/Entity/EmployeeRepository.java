@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 public class EmployeeRepository {
     private List<Employee> employees;
 
+
     public EmployeeRepository() {
         employees = new ArrayList<>();
         employees.add(new Employee(1,"tom",21, Gender.Male,new BigDecimal(3000)));
@@ -21,6 +22,14 @@ public class EmployeeRepository {
 
     public List<Employee> getAll(){
         return employees;
+    }
+
+
+    public void resetRepo() {
+        employees = new ArrayList<>();
+        employees.add(new Employee(1,"tom",21, Gender.Male,new BigDecimal(3000)));
+        employees.add(new Employee(2,"jack",27, Gender.Female,new BigDecimal(7000)));
+        employees.add(new Employee(3,"kevin",23, Gender.Male,new BigDecimal(13000)));
     }
 
     public Employee getById(Integer id){

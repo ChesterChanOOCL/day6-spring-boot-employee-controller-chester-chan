@@ -1,9 +1,11 @@
 package com.oocl.springbootemployee;
 
+import com.oocl.springbootemployee.Entity.Company;
 import com.oocl.springbootemployee.Entity.Employee;
 import com.oocl.springbootemployee.Entity.EmployeeRepository;
 import com.oocl.springbootemployee.commmon.Gender;
 import jakarta.annotation.Resource;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.json.AutoConfigureJsonTesters;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -21,6 +23,7 @@ import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +41,11 @@ class EmployeeControllerTest {
     private JacksonTester<Employee> jacksonTester;
     @Resource
     private JacksonTester<List<Employee>> jacksonList;
+
+    @BeforeEach
+    public void resetRepository() {
+        employeeRepository.resetRepo();
+    }
 
     @Test
     public void should_return_all_employees_when_get_all_employee_given_exist() throws Exception {
@@ -98,6 +106,7 @@ class EmployeeControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.gender").value("Male"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.salary").value(new BigDecimal(3000)));
         //Then
+        resetRepository();
     }
 
     @Test
