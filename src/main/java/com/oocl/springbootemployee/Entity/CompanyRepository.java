@@ -12,7 +12,7 @@ public class CompanyRepository {
     public static final String OOCL = "OOCL";
     public static final String CARGO_SMART = "CargoSmart";
     public static final String IQAX = "IQAX";
-    private List<Company> companies = new ArrayList<>();
+    private List<Company> companies ;
 
     public List<Company> getAll() {
         return companies;
