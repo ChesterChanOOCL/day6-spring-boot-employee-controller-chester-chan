@@ -9,6 +9,9 @@ import java.util.List;
 @Repository
 public class CompanyRepository {
 
+    public static final String OOCL = "OOCL";
+    public static final String CARGO_SMART = "CargoSmart";
+    public static final String IQAX = "IQAX";
     private List<Company> companies = new ArrayList<>();
 
     public List<Company> getAll() {
@@ -16,12 +19,8 @@ public class CompanyRepository {
     }
     public CompanyRepository() {
         companies = new ArrayList<>();
-        companies.add(new Company(1,"OOCL"));
-        companies.add(new Company(2,"CargoSmart"));
-        companies.add(new Company(3,"IQAX"));
+        companies.add(new Company(1, OOCL));
+        companies.add(new Company(2, CARGO_SMART));
+        companies.add(new Company(3, IQAX));
     }
-
-
-
-
 }
