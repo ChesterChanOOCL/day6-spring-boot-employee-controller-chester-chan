@@ -1,11 +1,7 @@
 package com.oocl.springbootemployee.controller;
-
 import com.oocl.springbootemployee.Entity.Company;
 import com.oocl.springbootemployee.Entity.CompanyRepository;
-import com.oocl.springbootemployee.Entity.Employee;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
