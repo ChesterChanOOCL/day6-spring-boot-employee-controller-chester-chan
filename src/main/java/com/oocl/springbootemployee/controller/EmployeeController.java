@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/employee")
+@RequestMapping("/employees")
 public class EmployeeController {
     public EmployeeRepository employeeRepository;
 
@@ -44,7 +44,9 @@ public class EmployeeController {
         return employeeRepository.update(employee);
     }
 
+
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remove(@PathVariable Integer id){
          employeeRepository.remove(id);
     }
