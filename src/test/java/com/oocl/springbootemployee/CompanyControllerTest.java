@@ -43,11 +43,6 @@ public class CompanyControllerTest {
     @Test
     void should_return_all_companies_when_get_all() {
         List<Company> companies = companyRepository.getAll();
-
         assertEquals(3, companies.size());
     }
-
-
-
-
 }

@@ -5,7 +5,6 @@ import com.oocl.springbootemployee.Entity.EmployeeRepository;
 import com.oocl.springbootemployee.commmon.Gender;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -38,12 +37,10 @@ public class EmployeeController {
         return employeeRepository.save(employee);
     }
 
-
     @PutMapping
     public Employee update(@RequestBody Employee employee){
         return employeeRepository.update(employee);
     }
-
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class EmployeeRepository {
     private List<Employee> employees;
 
-
     public EmployeeRepository() {
         employees = new ArrayList<>();
         employees.add(new Employee(1,"tom",21, Gender.Male,new BigDecimal(3000)));
@@ -23,7 +22,6 @@ public class EmployeeRepository {
     public List<Employee> getAll(){
         return employees;
     }
-
 
     public void resetRepo() {
         employees = new ArrayList<>();
@@ -75,5 +73,4 @@ public class EmployeeRepository {
                 .limit(pageSize)
                 .collect(Collectors.toList());
     }
-
 }
